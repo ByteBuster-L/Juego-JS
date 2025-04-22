@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        .contenedores{
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            position: relative;
+            width: 150px;
+            height: 150px;
+            background-color: #fff;
+        }
+
+        .padre{
+            width: 460px;
+            height: auto;
+            background-color: black;
+            margin: auto;
+            padding: 30px;
+            margin-top: 200px;
+        }
+
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            opacity: 0.0001;
+        }
+    </style>
+</head>
+<body>
+    <div class="padre">
+        <div class="contenedores"></div>
+        <div class="contenedores"></div>
+        <div class="contenedores"></div>
+        <div class="contenedores"></div>
+        <div class="contenedores"></div>
+        <div class="contenedores"></div>
+    </div>
+    <div class="contador">
+        <p>ACIERTOS</p>
+        <p id="correctos">0</p>
+        <p>FALLAS</p>
+        <p id="restantes">0</p>
+    </div>
+    <script>
+        var imagenUr1 = "https://tse3.mm.bing.net/th/id/OIP.J7QBJ5nU-Lpc5dT3WLDLXwHaHa?rs=1&pid=ImgDetMain";
+
+        function xdddd() {
+            var aciertos = 0;
+            var oportunidades = 0;
+            var lugares = document.querySelectorAll(".contenedores");
+            var indiceAleatorio = Math.floor(Math.random() * lugares.length);
+            lugares[indiceAleatorio].innerHTML = `<img src = ${imagenUr1} alt =imagen aleatorio>`;
+
+            lugares.forEach(contenedor => {
+                contenedor.addEventListener("click", function() {
+                    const contClick = lugares[indiceAleatorio].id;
+                    if(contClick != lugares) {
+                        oportunidades++;
+                        document.getElementById("restantes").innerText = oportunidades;
+                        if(oportunidades === 2){
+                            alert("se acabaron las oportunidades")
+                            document.location.reload();
+                        }
+                    }
+                });
+            });
+
+            lugares[indiceAleatorio].addEventListener("click", function(){
+                const imagenCorrecta = lugares[indiceAleatorio].id;
+             if (this.id === imagenCorrecta) {
+            aciertos++;
+            oportunidades = 0;
+            document.getElementById("correctos").innerText = aciertos;
+            document.getElementById("restantes").innerText = oportunidades;
+            }
+            });
+
+        }
+        xdddd();
+    </script>
+</body>
+</html>
