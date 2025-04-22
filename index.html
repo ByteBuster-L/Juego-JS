@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
         body{
             text-align: center;
         }
@@ -14,16 +19,18 @@
             position: relative;
             width: 150px;
             height: 150px;
-            background-color: #fff;
+            background-color: #f2f2f2;
+            border-radius: 8px;
         }
 
         .padre{
             width: 460px;
             height: auto;
-            background-color: black;
+            background-color: #e1e1e1;
             margin: auto;
             padding: 30px;
-            margin-top: 200px;
+            border-radius: 8px;
+            box-shadow: 0 8px 4px 0 rgba(0, 0, 0, 0.2);
         }
 
         img{
@@ -31,17 +38,55 @@
             width: 100%;
             object-fit: cover;
             opacity: 0.0001;
+            border-radius: 8px;
+        }
+
+        .contador{
+            margin: auto;
+            margin-top: 15px;
+            padding: 12px;
+            border: none;
+            height: auto;
+            width: 250px;
+            background-color: #e1e1e1;
+            border-radius: 16px;
+            box-shadow: 0 8px 4px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .contador p{
+            font-family: sans-serif;
+            font-size: 14px;
+            display: inline-block;
+            padding: 4px;
+            background-color: #e1e1e1;
+        }
+        .opacidad{
+            opacity: 1;
+        }
+        h1{
+            padding: 20px;
+            margin-bottom: 30px;
+            width: 100%;
+            font-family: sans-serif;
+            font-size: 40px;
+            box-sizing: border-box;
+            background-color: #e1e1e1;
+        }
+        .imagen-oculta{
+            opacity: 0.0001;
+            transition: opacity 0.3s;
         }
     </style>
 </head>
 <body>
+    <h1>Juego Js</h1>
     <div class="padre">
-        <div class="contenedores"></div>
-        <div class="contenedores"></div>
-        <div class="contenedores"></div>
-        <div class="contenedores"></div>
-        <div class="contenedores"></div>
-        <div class="contenedores"></div>
+        <div id="lol" class="contenedores"></div>
+        <div id="lol" class="contenedores"></div>
+        <div id="lol" class="contenedores"></div>
+        <div id="lol" class="contenedores"></div>
+        <div id="lol" class="contenedores"></div>
+        <div id="lol" class="contenedores"></div>
     </div>
     <div class="contador">
         <p>ACIERTOS</p>
@@ -51,13 +96,12 @@
     </div>
     <script>
         var imagenUr1 = "https://tse3.mm.bing.net/th/id/OIP.J7QBJ5nU-Lpc5dT3WLDLXwHaHa?rs=1&pid=ImgDetMain";
-
         function xdddd() {
             var aciertos = 0;
             var oportunidades = 0;
             var lugares = document.querySelectorAll(".contenedores");
             var indiceAleatorio = Math.floor(Math.random() * lugares.length);
-            lugares[indiceAleatorio].innerHTML = `<img src = ${imagenUr1} alt =imagen aleatorio>`;
+            lugares[indiceAleatorio].innerHTML = `<img src = ${imagenUr1} alt =imagen aleatorio class = imagen-oculta>`;
 
             lugares.forEach(contenedor => {
                 contenedor.addEventListener("click", function() {
@@ -65,6 +109,10 @@
                     if(contClick != lugares) {
                         oportunidades++;
                         document.getElementById("restantes").innerText = oportunidades;
+                        var divs = document.querySelectorAll(".contenedores");
+                        divs.forEach(div => {
+                            div.style.backgroundColor = "#f0000c";
+                        })
                         if(oportunidades === 2){
                             alert("se acabaron las oportunidades")
                             document.location.reload();
@@ -80,6 +128,19 @@
             oportunidades = 0;
             document.getElementById("correctos").innerText = aciertos;
             document.getElementById("restantes").innerText = oportunidades;
+            var divs = document.querySelectorAll(".contenedores");
+            divs.forEach(div => {
+                div.style.backgroundColor = "#00e611";
+            })
+
+            const imagen = this.querySelector("img");
+            if (imagen) {
+            imagen.style.opacity = "1";
+            }
+
+            if (aciertos === 2){
+                document.location.reload();
+            }
             }
             });
 
